@@ -10,7 +10,6 @@ class Auth {
     private static int countLogin, countLogout;
     private static String email, password;
 
-    //Kegiatan 1
     public static void main(String[] args) {
 
         tabelAkun.put("labit@umm.ac.id", "Labit321");
@@ -19,7 +18,21 @@ class Auth {
         tabelAkun.put("dosen.tersayang@umm.ac.id", "dosenkuGG");
         tabelAkun.put("email.saya@umm.ac.id", "email_Student");
 
-        System.out.println("\n<><><>Hash Map<><><>");
+        System.out.println("Praktikum Modul 3");
+        System.out.println("1. Kegiatan Satu");
+        System.out.println("2. Kegiatan Dua");
+        System.out.print("Pilih : ");
+        int pilih = userInput.nextInt();
+        if (pilih == 1) {
+            menuKegSatu();
+        } else {
+            menuKegDua();
+        }
+    }
+
+    //Kegiatan 1
+    private static void menuKegSatu() {
+        System.out.println("\n<><>Kegiatan Satu<><>");
         System.out.println("1. Register Akun");
         System.out.println("2. Hapus Akun");
         System.out.println("3. Email UMM");
@@ -34,6 +47,7 @@ class Auth {
                 System.out.print("Inputkan Password   : ");
                 password = userInput.next();
                 registerAkun(email, password);
+                menuKegSatu();
                 break;
             case 2:
                 System.out.println("\n<><>Hapus Akun<><>");
@@ -42,65 +56,22 @@ class Auth {
                 System.out.print("Inputkan Password   : ");
                 password = userInput.next();
                 hapusAkun(email, password);
+                menuKegSatu();
                 break;
             case 3:
                 System.out.println("\n<><>List Email UMM<><>");
                 totalEmailUMM();
+                menuKegSatu();
                 break;
             case 4:
                 menuKegDua();
                 break;
             default:
                 System.err.println("Pilihan tidak ada!!!");
+                menuKegSatu();
         }
     }
 
-    private static void menuKegDua() {
-        System.out.println("\n<><>Kegiatan Dua<><>");
-        System.out.println("1. Login Akun");
-        System.out.println("2. Logout Akun");
-        System.out.println("3. Total Akun yang Login");
-        System.out.println("4. Total Akun yang Logout");
-        System.out.println("5. Total Akun yang dalam Sesi Login");
-        System.out.print("Input Pilihan : ");
-        int pilih = userInput.nextInt();
-        switch (pilih) {
-            case 1:
-                System.out.println("\nLogin Akun");
-                System.out.print("Inputkan Email      : ");
-                email = userInput.next();
-                System.out.print("Inputkan Password   : ");
-                password = userInput.next();
-                loginAkun(email, password);
-                break;
-            case 2:
-                System.out.println("\nLogout Akun");
-                System.out.println("Konfirmasi email untuk logout akun");
-                System.out.print("Inputkan Email      : ");
-                email = userInput.next();
-                logoutAkun(email);
-                break;
-            case 3:
-                totalLogin();
-                break;
-            case 4:
-                totalLogout();
-                break;
-            case 5:
-                totalAuth();
-                break;
-            default:
-                System.err.println("Pilihan tidak ada!!!");
-                menuKegDua();
-        }
-
-        System.out.println("\n<><>Login Akun<><>");
-        System.out.print("Inputkan Email      : ");
-        email = userInput.next();
-        System.out.print("Inputkan Password   : ");
-        password = userInput.next();
-        loginAkun(email, password);
-    }
 
     static Boolean registerAkun(String email, String password) {
 
@@ -135,7 +106,6 @@ class Auth {
             System.err.println("Akun tidak ditemukan ");
             return false;
         }
-
     }
 
     private static int totalEmailUMM() {
@@ -150,6 +120,49 @@ class Auth {
     }
 
     //Kegiatan 2
+    private static void menuKegDua() {
+        System.out.println("\n<><>Kegiatan Dua<><>");
+        System.out.println("1. Login Akun");
+        System.out.println("2. Logout Akun");
+        System.out.println("3. Total Akun yang Login");
+        System.out.println("4. Total Akun yang Logout");
+        System.out.println("5. Total Akun yang dalam Sesi Login");
+        System.out.println("6. Kegiatan Satu");
+        System.out.print("Input Pilihan : ");
+        int pilih = userInput.nextInt();
+        switch (pilih) {
+            case 1:
+                System.out.println("\nLogin Akun");
+                System.out.print("Inputkan Email      : ");
+                email = userInput.next();
+                System.out.print("Inputkan Password   : ");
+                password = userInput.next();
+                loginAkun(email, password);
+                break;
+            case 2:
+                System.out.println("\nLogout Akun");
+                System.out.println("Konfirmasi email untuk logout akun");
+                System.out.print("Inputkan Email      : ");
+                email = userInput.next();
+                logoutAkun(email);
+                break;
+            case 3:
+                totalLogin();
+                break;
+            case 4:
+                totalLogout();
+                break;
+            case 5:
+                totalAuth();
+                break;
+            case 6:
+                menuKegSatu();
+                break;
+            default:
+                System.err.println("Pilihan tidak ada!!!");
+                menuKegDua();
+        }
+    }
 
     private static Boolean loginAkun(String email, String password) {
 
@@ -206,5 +219,4 @@ class Auth {
         menuKegDua();
         return 0;
     }
-
 }
