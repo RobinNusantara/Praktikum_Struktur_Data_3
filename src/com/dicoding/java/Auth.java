@@ -7,6 +7,8 @@ class Auth {
     private static Scanner userInput = new Scanner(System.in);
     private static HashMap<String, String> tabelAkun = new HashMap<>();
     private static HashMap<String, String> tabelSesiLogin = new HashMap<>();
+    private static int countLogin, countLogout;
+    private static String email, password;
 
     //Kegiatan 1
     public static void main(String[] args) {
@@ -17,11 +19,11 @@ class Auth {
         tabelAkun.put("dosen.tersayang@umm.ac.id", "dosenkuGG");
         tabelAkun.put("email.saya@umm.ac.id", "email_Student");
 
-        String email, password;
         System.out.println("\n<><><>Hash Map<><><>");
         System.out.println("1. Register Akun");
         System.out.println("2. Hapus Akun");
         System.out.println("3. Email UMM");
+        System.out.println("4. Kegiatan Dua");
         System.out.print("Input Pilihan : ");
         int input = userInput.nextInt();
         switch (input) {
@@ -45,10 +47,59 @@ class Auth {
                 System.out.println("\n<><>List Email UMM<><>");
                 totalEmailUMM();
                 break;
+            case 4:
+                menuKegDua();
+                break;
             default:
                 System.err.println("Pilihan tidak ada!!!");
         }
+    }
 
+    private static void menuKegDua() {
+        System.out.println("\n<><>Kegiatan Dua<><>");
+        System.out.println("1. Login Akun");
+        System.out.println("2. Logout Akun");
+        System.out.println("3. Total Akun yang Login");
+        System.out.println("4. Total Akun yang Logout");
+        System.out.println("5. Total Akun yang dalam Sesi Login");
+        System.out.print("Input Pilihan : ");
+        int pilih = userInput.nextInt();
+        switch (pilih) {
+            case 1:
+                System.out.println("\nLogin Akun");
+                System.out.print("Inputkan Email      : ");
+                email = userInput.next();
+                System.out.print("Inputkan Password   : ");
+                password = userInput.next();
+                loginAkun(email, password);
+                break;
+            case 2:
+                System.out.println("\nLogout Akun");
+                System.out.println("Konfirmasi email untuk logout akun");
+                System.out.print("Inputkan Email      : ");
+                email = userInput.next();
+                logoutAkun(email);
+                break;
+            case 3:
+                totalLogin();
+                break;
+            case 4:
+                totalLogout();
+                break;
+            case 5:
+                totalAuth();
+                break;
+            default:
+                System.err.println("Pilihan tidak ada!!!");
+                menuKegDua();
+        }
+
+        System.out.println("\n<><>Login Akun<><>");
+        System.out.print("Inputkan Email      : ");
+        email = userInput.next();
+        System.out.print("Inputkan Password   : ");
+        password = userInput.next();
+        loginAkun(email, password);
     }
 
     static Boolean registerAkun(String email, String password) {
@@ -99,7 +150,61 @@ class Auth {
     }
 
     //Kegiatan 2
-    
 
+    private static Boolean loginAkun(String email, String password) {
+
+        if (tabelAkun.containsKey(email) && tabelAkun.containsValue(password)) {
+            System.out.println("\nLogin Berhasil");
+            tabelSesiLogin.put(email, password);
+            System.out.println("Welcome ^_^ " + email);
+            countLogin += 1;
+            menuKegDua();
+            return true;
+        } else {
+            System.err.println("Login gagal!!!");
+            System.err.println("Email salah atau tidak terdaftar");
+            menuKegDua();
+            return false;
+        }
+    }
+
+    private static Boolean logoutAkun(String email) {
+
+        if (tabelSesiLogin.containsKey(email)) {
+            tabelSesiLogin.remove(email);
+            System.out.println("\nLogout Akun....");
+            System.out.println("Logout Berhasil ");
+            countLogin -= 1;
+            countLogout += 1;
+            menuKegDua();
+            return true;
+        } else {
+            System.err.println("Email Salah");
+            menuKegDua();
+            return false;
+        }
+    }
+
+    private static int totalLogin() {
+        System.out.println("\nTotal akun yang Login " + countLogin);
+        menuKegDua();
+        return countLogin;
+    }
+
+    private static int totalLogout() {
+        System.out.println("\nTotal akun yang Logout " + countLogout);
+        menuKegDua();
+        return countLogout;
+    }
+
+    private static int totalAuth() {
+        System.out.println("Total Data Yang Sedang Login : ");
+        System.out.println("Total : " + tabelSesiLogin.size());
+        for (String key : tabelSesiLogin.keySet()) {
+            System.out.println("Email yang Sedang Login : " + key);
+        }
+        menuKegDua();
+        return 0;
+    }
 
 }
