@@ -14,7 +14,8 @@ class Auth {
     private static int countLogin, countLogout;
     private static String email, password;
 
-    public static void main(String[] args) {
+    //Kegiatan 1
+    static void menuKegSatu() {
 
         tabelAkun.put("labit@umm.ac.id", "Labit321");
         tabelAkun.put("kharismamuzaki@gmail.com", "Testing123");
@@ -22,20 +23,6 @@ class Auth {
         tabelAkun.put("dosen.tersayang@umm.ac.id", "dosenkuGG");
         tabelAkun.put("email.saya@umm.ac.id", "email_Student");
 
-        System.out.println("Praktikum Modul 3");
-        System.out.println("1. Kegiatan Satu");
-        System.out.println("2. Kegiatan Dua");
-        System.out.print("Pilih : ");
-        int pilih = userInput.nextInt();
-        if (pilih == 1) {
-            menuKegSatu();
-        } else {
-            menuKegDua();
-        }
-    }
-
-    //Kegiatan 1
-    private static void menuKegSatu() {
         System.out.println("\n<><>Kegiatan Satu<><>");
         System.out.println("1. Register Akun");
         System.out.println("2. Hapus Akun");
@@ -124,7 +111,7 @@ class Auth {
     }
 
     //Kegiatan 2
-    private static void menuKegDua() {
+    static void menuKegDua() {
         System.out.println("\n<><>Kegiatan Dua<><>");
         System.out.println("1. Login Akun");
         System.out.println("2. Logout Akun");
