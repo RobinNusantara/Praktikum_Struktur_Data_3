@@ -84,7 +84,7 @@ class Auth {
 
     static Boolean hapusAkun(String email, String password) {
 
-        if (tabelAkun.containsKey(email) && tabelAkun.containsValue(password)) {
+        if (tabelAkun.containsKey(email) && password.equals(tabelAkun.get(email))) {
             System.out.println("Akun berhasil di hapus");
             tabelAkun.remove(email);
             System.out.println();
@@ -92,9 +92,12 @@ class Auth {
                 System.out.println("Email : " + key);
             }
             System.out.println();
+            menuKegSatu();
             return true;
         } else {
-            System.err.println("Akun tidak ditemukan ");
+            System.err.println("Hapus akun gagal!!!\n" +
+                    "Email/Password salah atau tidak terdaftar");
+            menuKegSatu();
             return false;
         }
     }
@@ -157,7 +160,7 @@ class Auth {
 
     private static Boolean loginAkun(String email, String password) {
 
-        if (tabelAkun.containsKey(email) && tabelAkun.containsValue(password)) {
+        if (tabelAkun.containsKey(email) && password.equals(tabelAkun.get(email))) {
             System.out.println("\nLogin Berhasil");
             tabelSesiLogin.put(email, password);
             System.out.println("Welcome ^_^ " + email);
@@ -165,8 +168,8 @@ class Auth {
             menuKegDua();
             return true;
         } else {
-            System.err.println("Login gagal!!!");
-            System.err.println("Email salah atau tidak terdaftar");
+            System.err.println("Login gagal!!!\n" +
+                    "Email/Password salah atau tidak terdaftar");
             menuKegDua();
             return false;
         }
